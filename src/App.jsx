@@ -6,7 +6,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import ProjectCreation from "./pages/entreprneur/project/creation/ProjectCreation.jsx";
 import ProjectsPage from "./pages/entreprneur/project/Project.jsx";
-import EcoCommunity from "./pages/Layout.jsx";
+import EcoCommunity from "./pages/Landingpage.jsx";
 import HelpRequestPage from "./pages/entreprneur/Request/creation/Request.jsx";
 import HelpRequestsListPage from "./pages/entreprneur/Request/RequestDisaplay/RequestDisplay.jsx";
 import CreateAnnouncementPage from "./pages/ONG-Associations/Announcement/creation/AnnouncementCreation.jsx";
