@@ -65,11 +65,6 @@ const EntrepreneurLayout = ({ children }) => {
       icon: <Users className="h-5 w-5" /> 
     },
     { 
-      path: '/entrepreneur/analytics', 
-      name: 'Analytique', 
-      icon: <BarChart2 className="h-5 w-5" /> 
-    },
-    { 
       path: '/entrepreneur/settings', 
       name: 'Paramètres', 
       icon: <Settings className="h-5 w-5" /> 

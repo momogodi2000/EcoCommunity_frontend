@@ -3,6 +3,7 @@ import {Upload, Info, ArrowLeft} from 'lucide-react';
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
 import api from "../../../../Services/api.js";
+import EntrepreneurLayout from '../../../Layout/EntrepreneurLayout.jsx';
 
 const ProjectCreationForm = () => {
     const navigate = useNavigate();
@@ -297,7 +298,7 @@ const ProjectCreationForm = () => {
         return err.message || 'An error occurred while creating the project.';
     };
 
-    return (
+    const formContent = (
         <div className="min-h-screen bg-gray-50 pt-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="bg-white rounded-lg shadow-xl p-6 md:p-8">
@@ -337,7 +338,7 @@ const ProjectCreationForm = () => {
                             </div>
                         </div>
 
-                        {error && (
+                        {error && showError && (
                             <div className="flex items-center bg-red-100 text-red-700 p-4 rounded-md mb-4 relative">
                                 <span className="text-xl mr-3">⚠️</span>
                                 <span className="flex-grow">{error}</span>
@@ -352,7 +353,7 @@ const ProjectCreationForm = () => {
 
                         {submissionStatus.success && (
                             <div className="flex items-center bg-green-50 text-green-700 p-4 rounded-md mb-4 relative">
-                                <span className="text-xl mr-3">⚠️</span>
+                                <span className="text-xl mr-3">✓</span>
                                 <span className="flex-grow">{submissionStatus.message}</span>
                                 <button
                                     onClick={handleCloseError}
@@ -364,7 +365,7 @@ const ProjectCreationForm = () => {
                         )}
 
                         <form onSubmit={handleSubmit} className="space-y-6">
-                        {currentStep === 1 && (
+                            {currentStep === 1 && (
                                 <div className="space-y-6">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700">
@@ -494,6 +495,7 @@ const ProjectCreationForm = () => {
                                                         </div>
                                                         <input
                                                             type="file"
+                                                            className="hidden"
                                                             name="id_card"
                                                             onChange={(e) => handleFileUpload(e, 'id_card')}
                                                             accept=".pdf,.jpg,.jpeg,.png"
@@ -501,6 +503,11 @@ const ProjectCreationForm = () => {
                                                         />
                                                     </label>
                                                 </div>
+                                                {formData.documents.id_card && (
+                                                    <p className="mt-2 text-sm text-emerald-600">
+                                                        Fichier sélectionné: {formData.documents.id_card.name}
+                                                    </p>
+                                                )}
                                             </div>
 
                                             <div className="border rounded-lg p-4">
@@ -515,6 +522,7 @@ const ProjectCreationForm = () => {
                                                         </div>
                                                         <input
                                                             type="file"
+                                                            className="hidden"
                                                             name="tax_clearance"
                                                             onChange={(e) => handleFileUpload(e, 'tax_clearance')}
                                                             accept=".pdf,.jpg,.jpeg,.png"
@@ -522,6 +530,11 @@ const ProjectCreationForm = () => {
                                                         />
                                                     </label>
                                                 </div>
+                                                {formData.documents.tax_clearance && (
+                                                    <p className="mt-2 text-sm text-emerald-600">
+                                                        Fichier sélectionné: {formData.documents.tax_clearance.name}
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -541,12 +554,18 @@ const ProjectCreationForm = () => {
                                                         </div>
                                                         <input
                                                             type="file"
+                                                            className="hidden"
                                                             name="business_register"
                                                             onChange={(e) => handleFileUpload(e, 'business_register')}
                                                             accept=".pdf,.jpg,.jpeg,.png"
                                                         />
                                                     </label>
                                                 </div>
+                                                {formData.documents.business_register && (
+                                                    <p className="mt-2 text-sm text-emerald-600">
+                                                        Fichier sélectionné: {formData.documents.business_register.name}
+                                                    </p>
+                                                )}
                                             </div>
 
                                             <div className="border rounded-lg p-4">
@@ -554,47 +573,52 @@ const ProjectCreationForm = () => {
                                                     Étude de Faisabilité
                                                 </label>
                                                 <div className="flex items-center justify-center w-full">
-                                                    <label
-                                                        className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-                                                        <div
-                                                            className="flex flex-col items-center justify-center pt-5 pb-6">
+                                                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                                                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                                             <Upload className="w-8 h-8 mb-2 text-emerald-500"/>
-                                                            <p className="text-sm text-gray-500">Cliquez pour
-                                                                télécharger</p>
+                                                            <p className="text-sm text-gray-500">Cliquez pour télécharger</p>
                                                         </div>
                                                         <input
                                                             type="file"
+                                                            className="hidden"
                                                             name="feasibility_study"
                                                             onChange={(e) => handleFileUpload(e, 'feasibility_study')}
                                                             accept=".pdf,.jpg,.jpeg,.png"
                                                         />
                                                     </label>
                                                 </div>
+                                                {formData.documents.feasibility_study && (
+                                                    <p className="mt-2 text-sm text-emerald-600">
+                                                        Fichier sélectionné: {formData.documents.feasibility_study.name}
+                                                    </p>
+                                                )}
+                                            </div>
 
-                                                <div className="border rounded-lg p-4">
-                                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                        Photo du projet *
+                                            <div className="border rounded-lg p-4">
+                                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                                    Photo du projet *
+                                                </label>
+                                                <div className="flex items-center justify-center w-full">
+                                                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                                                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                                            <Upload className="w-8 h-8 mb-2 text-emerald-500"/>
+                                                            <p className="text-sm text-gray-500">Cliquez pour télécharger</p>
+                                                        </div>
+                                                        <input
+                                                            type="file"
+                                                            className="hidden"
+                                                            name="project_photos"
+                                                            onChange={(e) => handleFileUpload(e, 'project_photos')}
+                                                            accept=".jpg,.jpeg,.png"
+                                                            required
+                                                        />
                                                     </label>
-                                                    <div className="flex items-center justify-center w-full">
-                                                        <label
-                                                            className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-                                                            <div
-                                                                className="flex flex-col items-center justify-center pt-5 pb-6">
-                                                                <Upload className="w-8 h-8 mb-2 text-emerald-500"/>
-                                                                <p className="text-sm text-gray-500">Cliquez pour
-                                                                    télécharger</p>
-                                                            </div>
-                                                            <input
-                                                                type="file"
-                                                                name="project_photos"
-                                                                onChange={(e) => handleFileUpload(e, 'project_photos')}
-                                                                accept=".pdf,.jpg,.jpeg,.png"
-                                                                required
-                                                            />
-                                                        </label>
-                                                    </div>
                                                 </div>
-
+                                                {formData.documents.project_photos.length > 0 && (
+                                                    <p className="mt-2 text-sm text-emerald-600">
+                                                        {formData.documents.project_photos.length} photo(s) sélectionnée(s)
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -676,28 +700,32 @@ const ProjectCreationForm = () => {
                 </div>
             </div>
 
-            {/* Bottom Banner */}
-            <div className="bg-emerald-700 mt-16 py-8">
+              {/* Bottom Banner */}
+              <div className="bg-emerald-700 mt-16 py-8">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center">
-                        <h2 className="text-2xl font-bold text-white mb-4">
-                            Prêt à faire partie de notre communauté ?
-                        </h2>
-                        <p className="text-emerald-100 mb-6">
-                            Rejoignez les entrepreneurs qui transforment leurs communautés à travers EcoCommunity
+                    <h3 className="text-xl font-bold text-white mb-4">
+                            Prêt à transformer votre idée en réalité ?
+                        </h3>
+                        <p className="text-emerald-100 mb-6 max-w-2xl mx-auto">
+                            Notre équipe est là pour vous accompagner à chaque étape de votre projet entrepreneurial.
                         </p>
-                        <div className="flex justify-center space-x-4">
-                            <button className="px-6 py-3 bg-white text-emerald-700 rounded-md font-medium hover:bg-emerald-50 transition-colors">
-                                En savoir plus
-                            </button>
-                            <button className="px-6 py-3 bg-yellow-500 text-white rounded-md font-medium hover:bg-yellow-600 transition-colors">
-                                Créer un compte
-                            </button>
-                        </div>
+                        <button
+                            onClick={() => navigate('/contact')}
+                            className="px-6 py-3 bg-white text-emerald-700 rounded-md font-medium hover:bg-gray-100 transition duration-200"
+                        >
+                            Contactez-nous
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+    );
+
+    return (
+        <EntrepreneurLayout>
+            {formContent}
+        </EntrepreneurLayout>
     );
 };
 

@@ -6,6 +6,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import ProjectCreation from "./pages/entreprneur/project/creation/ProjectCreation.jsx";
 import ProjectsPage from "./pages/entreprneur/project/Project.jsx";
+import DashboardEntrepreneur from "./pages/entreprneur/Dashboard/entrepreneur_dashbaord.jsx";
 import EcoCommunity from "./pages/Landingpage.jsx";
 import HelpRequestPage from "./pages/entreprneur/Request/creation/Request.jsx";
 import HelpRequestsListPage from "./pages/entreprneur/Request/RequestDisaplay/RequestDisplay.jsx";
@@ -68,6 +69,8 @@ function App() {
                 <Route path="/entrepreneur/opportunity" element={ <ProtectedRoute allowedRoles={['entrepreneur']}> <OpportunityPage /> </ProtectedRoute>} />
                 <Route path="/entrepreneur/collaborators" element={ <ProtectedRoute allowedRoles={['entrepreneur']}> <CollaboratorPage /> </ProtectedRoute>} />
                 <Route path="/entrepreneur/settings" element={ <ProtectedRoute allowedRoles={['entrepreneur']}> <SettingsPage /> </ProtectedRoute>} />
+                <Route path="/entrepreneur/dashboard" element={ <ProtectedRoute allowedRoles={['entrepreneur']}> <DashboardEntrepreneur /> </ProtectedRoute> }/>
+
 
                 // Investors part
                 //Role base authentication
